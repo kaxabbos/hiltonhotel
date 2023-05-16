@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Информация об отеле</title>
+</head>
+
+<head th:insert="blocks\head :: head"></head>
+
+<body style="background: #6cd8ff">
+
+<nav th:insert="blocks/nav :: nav"></nav>
+
+<section class="py-5">
+    <div class="container py-5">
+        <div class="row mb-4 mb-lg-5">
+            <div class="col-md-8 col-xl-6 text-center mx-auto">
+                <h2 class="fw-bold">Информация об отеле</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col" align="center">
+                <p class="lead">Адрес: Проспект Победителей 99, корпус 99</p>
+                <p class="lead">Телефон для связи (A1): +375 (99) 999-99-99</p>
+                <p class="lead">Телефон для связи (MTC): +375 (99) 999-99-99</p>
+                <p class="lead">Телефон для связи (life:)): +375 (99) 999-99-99</p>
+            </div>
+            <div class="col-2"></div>
+        </div>
+        <img src="/img/def/bg.jpg" width="100%" class="mb-5">
+        <div align="center">
+            <iframe width="75%" height="500" src="https://www.youtube.com/embed/maG42Cfrrok"
+                    title="YouTube video player" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen></iframe>
+        </div>
+    </div>
+</section>
+
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/bold-and-bright.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>База номеров</title>
+</head>
+
+<head th:insert="blocks\head :: head"></head>
+
+<body style="background: #6cd8ff">
+
+<nav th:insert="blocks/nav :: nav"></nav>
+
+<section class="py-5">
+    <div class="container py-5">
+        <div class="row mb-4 mb-lg-5">
+            <div class="col-md-8 col-xl-6 text-center mx-auto">
+                <h2 class="fw-bold">База номеров</h2>
+            </div>
+        </div>
+
+        <form class="text-center mb-3" action="/room/search" method="post">
+            <div class="row mb-3">
+                <div class="col">
+                    <a class="btn btn-success w-100" role="button" href="/room/all">Все</a>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col">
+                    <input th:value="${input}" class="form-control" type="text" name="search" placeholder="Поиск">
+                </div>
+                <div class="col">
+                    <select class="form-select" name="category" required>
+                        <option th:each="category :  ${categories}" th:value="${category}"
+                                th:label="${category.name}" th:selected="${category == selectedCategory}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <button class="btn btn-warning w-100" type="submit">Найти</button>
+                </div>
+            </div>
+        </form>
+
+        <form th:each="room : ${rooms}" th:action="'/archive/add/' + ${room.id}" method="post"
+              style="margin-bottom: 10px;">
+            <div class="row">
+                <div class="col">
+                    <div class="row">
+                        <div class="col-auto text-center">
+                            <img th:src="'/img/' + ${room.img}" style="width: 200px;border-radius: 25px;"></div>
+                        <div class="col">
+                            <div><span>Номер:&nbsp;</span><span th:text="${room.name}"></span></div>
+                            <div><span>Категория:&nbsp;</span><a th:text="${room.category.getName()}"
+                                                                 th:href="'/room/category/' + ${room.category.name()}"></a>
+                            </div>
+                            <div><span>Цена за сутки:&nbsp;</span><span th:text="${room.price}"></span></div>
+                            <div><span>Количество спальных мест:&nbsp;</span><span th:text="${room.quantity}"></span>
+                            </div>
+                            <div><span>Этаж:&nbsp;</span><span th:text="${room.getFloor}"></span></div>
+                            <div th:if="${room.description != ''}"><span>Описание:&nbsp;</span><span
+                                    th:text="${room.description}"></span></div>
+                        </div>
+                    </div>
+                </div>
+                <div th:if="${user.role.name() != 'ADMIN'}"
+                     class="col-4 text-center">
+                    <div th:if="${user.role.name() == 'BUYER'}" class="row mb-2">
+                        <div class="col">
+                            <input class="form-control" type="number" name="quantity" min="1"
+                                   th:max="${room.quantity}" placeholder="Количество дней" required>
+                        </div>
+                        <div class="col">
+                            <input class="form-control" type="date" name="date"
+                                   th:max="${room.quantity}" required>
+                        </div>
+                    </div>
+                    <div th:if="${user.role.name() == 'BUYER'}" class="row">
+                        <div class="col">
+                            <button class="btn btn-warning" type="submit" style="width: 100%">Оформить</button>
+                        </div>
+                    </div>
+                    <div th:if="${user.role.name() == 'SELLER'}" class="row mb-5">
+                        <div class="col">
+                            <a class="btn btn-success" role="button" style="width: 100%;"
+                               th:href="'/room/edit/' + ${room.id}">Редактировать</a>
+                        </div>
+                    </div>
+                    <div th:if="${user.role.name() == 'SELLER'}" class="row">
+                        <div class="col">
+                            <a class="btn btn-danger" role="button" style="width: 100%"
+                               th:href="'/room/delete/' + ${room.id}">Удалить</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</section>
+
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/bold-and-bright.js"></script>
+</body>
+
+</html>

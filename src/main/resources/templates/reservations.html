@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Мои бронирования</title>
+</head>
+
+<head th:insert="blocks\head :: head"></head>
+
+<body style="background: #6cd8ff">
+
+<nav th:insert="blocks/nav :: nav"></nav>
+
+<section class="py-5">
+    <div class="container py-5">
+        <div class="row">
+            <div class="col">
+                <h1 class="text-center">Мои бронирования</h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <div th:each="cart : ${carts}" class="col-6">
+                <div class="row">
+                    <div class="col-auto text-center">
+                        <img th:src="'/img/' + ${cart.room.img}" style="width: 200px;border-radius: 25px;">
+                    </div>
+                    <div class="col-auto">
+                        <div>
+                            <span>Номер:&nbsp;</span>
+                            <span th:text="${cart.room.name}"></span>
+                        </div>
+                        <div>
+                            <span>Этаж:&nbsp;</span>
+                            <span th:text="${cart.room.getFloor}"></span>
+                        </div>
+                        <div>
+                            <span>Статус:&nbsp;</span>
+                            <span th:text="${cart.status.name}"></span>
+                        </div>
+                        <div>
+                            <span>Цена за сутки:&nbsp;</span>
+                            <span th:text="${cart.room.price}"></span>
+                        </div>
+                        <div>
+                            <span>Выбрано дней:&nbsp;</span>
+                            <span th:text="${cart.quantity}"></span>
+                        </div>
+                        <div>
+                            <span>Стоимость:&nbsp;</span>
+                            <span th:text="${cart.quantity * cart.room.price}"></span>
+                        </div>
+                        <div>
+                            <span>Дата заезда:&nbsp;</span>
+                            <span th:text="${cart.date}"></span>
+                        </div>
+                        <div>
+                            <span>Категория:&nbsp;</span>
+                            <span th:text="${cart.room.category.getName()}"></span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/bold-and-bright.js"></script>
+
+</body>
+
+</html>

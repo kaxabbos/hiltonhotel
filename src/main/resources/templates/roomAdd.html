@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Пополнить список номеров</title>
+</head>
+
+<head th:insert="blocks\head :: head"></head>
+
+<body style="background: #6cd8ff">
+
+<nav th:insert="blocks/nav :: nav"></nav>
+
+<section class="py-5">
+    <div class="container py-5">
+        <div class="row mb-4 mb-lg-5">
+            <div class="col-md-8 col-xl-6 text-center mx-auto">
+                <h2 class="fw-bold">Пополнить список номеров</h2>
+            </div>
+        </div>
+        <form action="/room/add" method="post" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col">
+                    <div class="row">
+                        <div class="col d-md-flex justify-content-md-center align-items-md-center"><input
+                                class="form-control" type="text" name="name" placeholder="Номер" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col">
+                    <div class="row">
+                        <div class="col d-md-flex justify-content-md-center align-items-md-center">
+                            <select class="form-select" name="category" required>
+                                <option th:each="category : ${categories}" th:value="${category}"
+                                        th:label="${category.getName()}"></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col">
+                    <div class="row">
+                        <div class="col d-md-flex justify-content-md-center align-items-md-center">
+                            <input min="1" step="1" class="form-control" type="number" name="quantity"
+                                   placeholder="Количество спальных мест"
+                                   required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col">
+                    <div class="row">
+                        <div class="col d-md-flex justify-content-md-center align-items-md-center">
+                            <input class="form-control" type="text" name="floor" placeholder="Этаж"
+                                    required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col">
+                    <div class="row">
+                        <div class="col d-md-flex justify-content-md-center align-items-md-center">
+                            <input min="1" class="form-control" type="number" placeholder="Цена за сутки"
+                                   name="price" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col">
+                    <div class="row">
+                        <div class="col d-md-flex justify-content-md-center align-items-md-center">
+                            <input class="form-control" type="file" name="img" accept="image/*" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col">
+                    <div class="row">
+                        <div class="col d-md-flex justify-content-md-center align-items-md-center">
+                            <input class="form-control" type="text" name="description"
+                                   placeholder="Описание (опционально)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col">
+                    <button class="btn btn-warning" type="submit" style="width: 100%">Внести номер в базу</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/bold-and-bright.js"></script>
+</body>
+
+</html>
